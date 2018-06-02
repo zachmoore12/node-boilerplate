@@ -47,16 +47,13 @@
   },
   "scripts": {
     "precommit": "yarn lint",
-    "prestart": "yarn docs",
     "start": "cross-env NODE_ENV=production pm2 start ./index.js",
     "dev": "nodemon ./index.js",
     "lint": "eslint **/*.js --ignore-path .gitignore --ignore-pattern internals/scripts",
-    "lint:fix": "yarn lint -- --fix",
     "lint:watch": "yarn lint -- --watch",
-    "test": "cross-env NODE_ENV=test nyc --reporter=html --reporter=text mocha --timeout 20000 --recursive src/tests --require babel-polyfill",
+    "test": "cross-env NODE_ENV=test nyc --reporter=html --reporter=text mocha --timeout 20000 --recursive src/api/*/tests --require babel-polyfill",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "postcoverage": "opn coverage/lcov-report/index.html",
-    "validate": "yarn lint && yarn test",
     "postpublish": "git push --tags"
   },
   "author": "Zach Moore",
